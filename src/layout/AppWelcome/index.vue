@@ -40,9 +40,6 @@ export default {
 </script>
 
 <style lang="postcss">
-.app-notice + .app-about {
-  margin-bottom: 0;
-}
 .btn-cta {
   display: inline-block;
   text-align: center;

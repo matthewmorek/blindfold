@@ -121,8 +121,6 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* padding-left: 4rem; */
-  /* padding-right: 4rem; */
 }
 
 .heading {

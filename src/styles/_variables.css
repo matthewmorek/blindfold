@@ -79,7 +79,7 @@
     --btn-text: #ffffff;
 
     --btn-bg--disabled: transparent;
-    --btn-border--disabled: rgba(255, 255, 255, 0.05);
+    --btn-border--disabled: rgba(255, 255, 255, 0.25);
     --btn-text--disabled: rgba(255, 255, 255, 0.25);
 
     --btn-primary-bg: #9ed5f6;
