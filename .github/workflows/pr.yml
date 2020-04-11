@@ -1,0 +1,41 @@
+name: PR Audit CI
+
+on: [pull_request]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install
+      - run: yarn run lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install
+      - run: yarn test
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 30 seconds
+        run: sleep 30
+      - name: Audit URLs using Lighthouse
+        uses: jakejarvis/lighthouse-action@master
+        with:
+          netlify_site: 'tramspotter.netlify.com'
+      - uses: actions/upload-artifact@master
+        with:
+          name: report
+          path: './report'

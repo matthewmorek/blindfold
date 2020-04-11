@@ -1,0 +1,107 @@
+:root {
+  --font-family: 'Nunito Sans', -apple-system, system-ui, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+
+  --app-bg: rgb(255, 255, 255);
+  --app-bg-blur: rgba(255, 255, 255, 0.75);
+
+  --header-shadow: rgba(0, 0, 0, 0.1);
+
+  --fancy-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05),
+    0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 4px 0 rgba(0, 0, 0, 0.05),
+    0 8px 8px 0 rgba(0, 0, 0, 0.05), 0 16px 8px 0 rgba(0, 0, 0, 0.05);
+
+  --color-primary: rgba(255, 255, 255);
+  --color-secondary: #171b21;
+  --color-accent: #9ed5f6;
+  --color-link: #036aa9;
+
+  --bg-positive: #7ae582;
+  --bg-negative: #ef767a;
+  --bg-warning: #f6e27f;
+
+  --text-positive: rgba(0, 0, 0, 0.75);
+  --text-negative: rgba(0, 0, 0, 0.75);
+
+  /* Button */
+  --btn-bg: #efefef;
+  --btn-border: rgba(0, 0, 0, 0);
+  --btn-text: #171b21;
+
+  /* Button -- disabled */
+  --btn-bg--disabled: transparent;
+  --btn-border--disabled: rgba(0, 0, 0, 0.05);
+  --btn-text--disabled: #171b21;
+
+  /* Button: Primary */
+  --btn-primary-bg: #9ed5f6;
+  --btn-primary-border: rgba(0, 0, 0, 0);
+  --btn-primary-text: #171b21;
+
+  --btn-pill-bg: #efefef;
+  --btn-pill-text: #171b21;
+
+  --surface-primary-bg: rgba(255, 255, 255, 0.35);
+  --surface-primary-blur: blur(48px);
+  --surface-secondary-bg: rgba(255, 255, 255, 0.35);
+  --surface-tertiary-bg: rgba(255, 255, 255, 0.15);
+  --surface-tertiary-border: rgba(0, 0, 0, 0.05);
+
+  --text-size: 1rem;
+  --text-size-sm: 0.875rem;
+  --text-size-xs: 0.75rem;
+  --text-color: #171b21;
+
+  --base-spacing: 1rem;
+
+  --icon: #171b21;
+
+  @media (prefers-color-scheme: dark) {
+    --app-bg: rgb(0, 0, 0);
+    --app-bg-blur: rgba(0, 0, 0, 0.5);
+
+    --header-shadow: rgba(255, 255, 255, 0.1);
+
+    --color-primary: rgba(0, 0, 0);
+    --color-secondary: rgba(255, 255, 255, 0.75);
+    --color-accent: #9ed5f6;
+    --color-link: #9ed5f6;
+
+    --bg-positive: #7ae582;
+    --bg-negative: #ef767a;
+    --bg-warning: #f6e27f;
+
+    --text-positive: rgba(0, 0, 0, 0.75);
+    --text-negative: rgba(0, 0, 0, 0.75);
+
+    --btn-bg: #3e3e3e;
+    --btn-border: rgba(255, 255, 255, 0);
+    --btn-text: #ffffff;
+
+    --btn-bg--disabled: transparent;
+    --btn-border--disabled: rgba(255, 255, 255, 0.05);
+    --btn-text--disabled: rgba(255, 255, 255, 0.25);
+
+    --btn-primary-bg: #9ed5f6;
+    --btn-primary-border: rgba(0, 0, 0, 0);
+    --btn-primary-text: #171b21;
+
+    --btn-pill-bg: #efefef;
+    --btn-pill-text: #171b21;
+
+    --surface-primary-bg: rgba(0, 0, 0, 0.75);
+    --surface-primary-blur: blur(48px);
+    --surface-secondary-bg: rgba(255, 255, 255, 0.15);
+    --surface-tertiary-bg: rgba(255, 255, 255, 0.05);
+    --surface-tertiary-border: rgba(0, 0, 0, 0.1);
+
+    --text-size: 1rem;
+    --text-size-sm: 0.875rem;
+    --text-size-xs: 0.75rem;
+    --text-color: #fafafa;
+
+    --base-spacing: 1rem;
+
+    --icon: #fafafa;
+  }
+}
