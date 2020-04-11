@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/matthewmorek/blindfold/raw/master/public/images/og-image.png" srcset="https://github.com/matthewmorek/blindfold/raw/master/public/images/og-image@2x.png 2x" alt="blindfold banner" /></p>
+<p align="center"><img src="https://github.com/matthewmorek/blindfold/raw/master/public/img/og-image.png" alt="blindfold banner" /></p>
 
 # Blindfold
 
