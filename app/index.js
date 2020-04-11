@@ -28,9 +28,12 @@ export default (app, http) => {
     secret: config.salt,
     cookie: {
       secure: isProduction,
+      secureProxy: isProduction,
       sameSite: true,
       httpOnly: true,
-      overwrite: true
+      overwrite: true,
+      maxAge: 24 * 3600,
+      domain: config.site_host
     }
   };
 
