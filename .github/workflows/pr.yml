@@ -1,5 +1,4 @@
-name: PR Audit CI
-
+name: PR Audit
 on: [pull_request]
 
 jobs:
