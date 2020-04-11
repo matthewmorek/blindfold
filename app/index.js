@@ -92,6 +92,10 @@ export default (app, http) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.get('*', function(req, res) {
+    res.redirect('https://' + req.headers.host + req.url);
+  });
+
   // Initiate authentication with Twitter
   app.get('/auth', passport.authenticate('twitter'));
 
