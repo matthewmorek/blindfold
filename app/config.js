@@ -14,7 +14,7 @@ class Config {
     this.app_secret = process.env.APP_SECRET || null;
     this.app_version = require('../package').version;
     this.salt = process.env.SALT || null;
-    this.bs_key = process.env.BS_KEY || null;
+    this.bs_key = process.env.BUGSNAG_API_KEY || null;
   }
 }
 

@@ -92,8 +92,12 @@ export default (app, http) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.get('*', function(req, res) {
-    res.redirect('https://' + req.headers.host + req.url);
+  app.get('*', function(req, res, next) {
+    if (req.protocol === 'http') {
+      return res.redirect(301, `https://${req.hostname}${req.originalUrl}`);
+    } else {
+      return next();
+    }
   });
 
   // Initiate authentication with Twitter
