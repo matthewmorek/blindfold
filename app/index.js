@@ -17,8 +17,6 @@ const Twitter = require('twitter');
 const bugsnag = require('@bugsnag/js');
 const bugsnagExpress = require('@bugsnag/plugin-express');
 
-let app = express();
-
 export default (app, http) => {
   var isProduction = config.env === 'production' ? true : false;
 
@@ -32,28 +30,17 @@ export default (app, http) => {
       sameSite: true,
       httpOnly: true,
       overwrite: true,
-      maxAge: 24 * 3600,
-      domain: config.site_host
+      maxAge: 24 * 3600
     }
   };
-
-  var callbackURL =
-    (isProduction ? 'https://' : 'http://') +
-    config.site_host +
-    (isProduction ? '' : ':' + config.port) +
-    '/auth/callback';
-
-  var appUrl =
-    (isProduction ? 'https://' : 'http://') +
-    config.site_host +
-    (isProduction ? '' : ':' + '3001');
 
   passport.use(
     new TwitterStrategy(
       {
         consumerKey: config.app_key,
         consumerSecret: config.app_secret,
-        callbackURL
+        callbackURL: '/auth/callback',
+        proxy: config.env.use_proxy
       },
       function(token, tokenSecret, profile, cb) {
         return cb(null, profile, {
@@ -118,11 +105,9 @@ export default (app, http) => {
         bugsnag.notify(new Error('Problem authenticating with Twitter API'), {
           errors: err
         });
-        return next(err);
+        return res.status(500).json({ error: err });
       }
-      if (!user) {
-        return res.redirect('/404');
-      }
+
       req.session.auth = info;
       req.session.user = {
         id: user.id,
@@ -130,7 +115,7 @@ export default (app, http) => {
         displayName: user.displayName,
         photo: user.photos[0].value
       };
-      res.redirect(appUrl);
+      res.redirect('/');
     })(req, res, next);
   });
 
