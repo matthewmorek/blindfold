@@ -51,7 +51,6 @@
     "reset-css": "^5.0.1",
     "twitter": "^1.7.1",
     "vue": "^2.6.11",
-    "vue-cookies": "^1.7.0",
     "vue-cli-plugin-express": "^1.0.2",
     "vue-template-compiler": "^2.6.11",
     "vue-wait": "^1.4.8",
