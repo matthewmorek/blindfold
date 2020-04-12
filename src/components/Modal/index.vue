@@ -47,9 +47,16 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--surface-primary-bg);
-  -webkit-backdrop-filter: var(--surface-primary-blur);
-  backdrop-filter: var(--surface-primary-blur);
+  background-color: #1a1a1a;
+
+  /* When backdrop-filter is supported */
+  @supports (
+    (-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))
+  ) {
+    background: var(--surface-primary-bg);
+    -webkit-backdrop-filter: var(--surface-primary-blur);
+    backdrop-filter: var(--surface-primary-blur);
+  }
 }
 
 .modal {
