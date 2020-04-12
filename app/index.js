@@ -17,15 +17,7 @@ const Twitter = require('twitter');
 const bugsnag = require('@bugsnag/js');
 const bugsnagExpress = require('@bugsnag/plugin-express');
 
-// let app = express();
-
 export default (app, http) => {
-  var trustProxy = false;
-  if (process.env.DYNO) {
-    // Apps on heroku are behind a trusted proxy
-    trustProxy = true;
-  }
-
   var isProduction = config.env === 'production' ? true : false;
 
   var _twitter;
@@ -48,7 +40,7 @@ export default (app, http) => {
         consumerKey: config.app_key,
         consumerSecret: config.app_secret,
         callbackURL: '/auth/callback',
-        proxy: trustProxy
+        proxy: config.env.use_proxy
       },
       function(token, tokenSecret, profile, cb) {
         return cb(null, profile, {
