@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueWait from 'vue-wait';
-import VueCookies from 'vue-cookies';
 import App from './App.vue';
 import store from './store';
 import './registerServiceWorker';
@@ -10,7 +9,6 @@ import './registerServiceWorker';
 // bugsnagClient.use(bugsnagVue, Vue);
 
 Vue.use(VueWait);
-Vue.use(VueCookies);
 
 Vue.config.productionTip = false;
 
