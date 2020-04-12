@@ -53,7 +53,7 @@ export default {
   @supports (
     (-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))
   ) {
-    background: var(--surface-primary-bg);
+    background-color: var(--surface-primary-bg);
     -webkit-backdrop-filter: var(--surface-primary-blur);
     backdrop-filter: var(--surface-primary-blur);
   }

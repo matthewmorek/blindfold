@@ -1,6 +1,6 @@
 {
   "name": "blindfold",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "private": true,
   "engines": {
     "node": "12.x"
