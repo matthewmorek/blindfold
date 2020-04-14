@@ -25,7 +25,7 @@
             <h2>Blindfold</h2>
           </header>
           <div class="about-box--content">
-            A simple noise suppression system for Twitter build with <a href="https://vuejs.org">Vue.js</a>, <a href="https://expressjs.com">Express</a>, and <a href="https://postcss.org">modern CSS</a>.
+            A simple noise suppression system for Twitter built with <a href="https://vuejs.org">Vue.js</a>, <a href="https://expressjs.com">Express</a>, and <a href="https://postcss.org">modern CSS</a>.
           </div>
           <div class="section-cta">
             <a href="https://ko-fi.com/matthewmorek" class="btn btn-cta btn-regular">Buy me a coffee ☕️</a>
