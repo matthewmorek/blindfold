@@ -134,9 +134,9 @@ export default (app, http) => {
     }
   });
 
-  app.post('/api/signout', function(req, res, next) {
+  app.post('/api/signout', function(req, res) {
     req.session = null;
-    res.status(200);
+    res.sendStatus(200);
   });
 
   // Fetch data about friendships from the API
