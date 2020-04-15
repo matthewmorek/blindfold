@@ -47,7 +47,7 @@ export default new Vuex.Store({
   actions: {
     fetchProfile({ commit }) {
       return axios
-        .get('/profile')
+        .get('/api/profile')
         .then(({ data }) => {
           commit('store_profile', data.profile);
         })
@@ -56,13 +56,13 @@ export default new Vuex.Store({
         });
     },
     silenceTheLambs() {
-      return axios.post('/friends', { wantRetweets: false });
+      return axios.post('/api/friends', { wantRetweets: false });
     },
     releaseTheKraken() {
-      return axios.post('/friends', { wantRetweets: true });
+      return axios.post('/api/friends', { wantRetweets: true });
     },
     signOut({ commit }) {
-      return axios.post('/signout').then(res => {
+      return axios.post('/api/signout').then(res => {
         commit('destroy_profile');
       });
     }

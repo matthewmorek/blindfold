@@ -5,7 +5,7 @@
     </template>
     <template #footer>
       <div class="app-footer--cta">
-        <a href="/auth" class="btn btn-cta">Sign in with Twitter</a>
+        <a href="/api/auth" class="btn btn-cta">Sign in with Twitter</a>
       </div>
       <!-- prettier-ignore -->
       <app-notice>
