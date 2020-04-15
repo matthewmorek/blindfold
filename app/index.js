@@ -223,7 +223,7 @@ export default (app, http) => {
             return _twitter
               .post('friendships/update', {
                 user_id: id,
-                retweets: req.body.want_retweets
+                retweets: req.body.wantRetweets
               })
               .then(function(response) {
                 count += 1;
