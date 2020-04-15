@@ -50,9 +50,7 @@ export default {
   background-color: #1a1a1a;
 
   /* When backdrop-filter is supported */
-  @supports (
-    (-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))
-  ) {
+  @supports (backdrop-filter: blur()) {
     background-color: var(--surface-primary-bg);
     -webkit-backdrop-filter: var(--surface-primary-blur);
     backdrop-filter: var(--surface-primary-blur);

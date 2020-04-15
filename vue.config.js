@@ -14,5 +14,15 @@ module.exports = {
       shouldServeApp: true,
       serverDir: './app'
     }
+  },
+
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:3000',
+        ws: true,
+        changeOrigin: true
+      }
+    }
   }
 };

@@ -47,22 +47,26 @@ export default new Vuex.Store({
   actions: {
     fetchProfile({ commit }) {
       return axios
-        .get('/profile')
-        .then(({ data }) => {
-          commit('store_profile', data.profile);
+        .get('/api/profile')
+        .then(({ data, status }) => {
+          if (status !== 200) {
+            commit('destroy_profile');
+          } else {
+            commit('store_profile', data.profile);
+          }
         })
         .catch(error => {
-          console.error(error);
+          console.log(error);
         });
     },
     silenceTheLambs() {
-      return axios.post('/friends', { wantRetweets: false });
+      return axios.post('/api/friends', { wantRetweets: false });
     },
     releaseTheKraken() {
-      return axios.post('/friends', { wantRetweets: true });
+      return axios.post('/api/friends', { wantRetweets: true });
     },
     signOut({ commit }) {
-      return axios.post('/signout').then(res => {
+      return axios.post('/api/signout').then(res => {
         commit('destroy_profile');
       });
     }
