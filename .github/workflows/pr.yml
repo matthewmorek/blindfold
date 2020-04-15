@@ -33,7 +33,7 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: jakejarvis/lighthouse-action@master
         with:
-          netlify_site: 'tramspotter.netlify.com'
+          netlify_site: 'blindfold-app.heroku.com'
       - uses: actions/upload-artifact@master
         with:
           name: report
