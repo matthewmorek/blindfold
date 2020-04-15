@@ -48,11 +48,15 @@ export default new Vuex.Store({
     fetchProfile({ commit }) {
       return axios
         .get('/api/profile')
-        .then(({ data }) => {
-          commit('store_profile', data.profile);
+        .then(({ data, status }) => {
+          if (status !== 200) {
+            commit('destroy_profile');
+          } else {
+            commit('store_profile', data.profile);
+          }
         })
         .catch(error => {
-          console.error(error);
+          console.log(error);
         });
     },
     silenceTheLambs() {

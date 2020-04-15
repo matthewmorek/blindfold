@@ -2,9 +2,8 @@
   <base-layout>
     <template #header>
       <div class="app-header-wrapper">
-        <app-icon width="32" class="icon" />
         <div class="profile">
-          <span class="profile--label">{{ profile.displayName }}</span>
+          <app-icon width="32" class="icon profile--app-icon" />
           <span class="profile--img"
             ><img
               :src="profile.photo"
@@ -12,7 +11,9 @@
               class="app-header-photo"
               width="24"
           /></span>
+          <span class="profile--label">{{ profile.displayName }}</span>
         </div>
+        <button class="btn-mini" @click="$emit('sign-out')">Sign out</button>
       </div>
     </template>
     <template #default>
@@ -99,6 +100,11 @@ export default {
   justify-content: space-between;
   align-items: center;
 
+  &--app-icon {
+    padding-right: 0.5rem;
+    border-right: 2px solid var(--btn-border--disabled);
+  }
+
   &--label {
     font-size: 0.75rem;
   }
@@ -106,6 +112,7 @@ export default {
   &--img {
     display: block;
     margin-left: 0.5rem;
+    margin-right: 0.5rem;
 
     img {
       display: block;
@@ -115,6 +122,17 @@ export default {
       height: 1.75rem;
     }
   }
+}
+
+.btn-mini {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-size: 0.875rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 64px;
+  display: block;
+  line-height: 1.5;
+  font-family: var(--font-family);
 }
 
 .app-main {
