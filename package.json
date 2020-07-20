@@ -35,7 +35,7 @@
     "express": "^4.17.1",
     "express-sanitizer": "^1.0.5",
     "helmet": "^3.23.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-twitter": "^1.0.4",
