@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["plugin:vue/essential", "@vue/prettier"],
+  "plugins": ["prettier", "vue"],
+  "rules": {
+    "prettier/prettier": ["warn"]
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "parser": "babel-eslint"
+  },
+  "globals": {
+    "expect": true,
+    "describe": true,
+    "it": true,
+    "test": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "before": true,
+    "after": true,
+    "jest": true
+  }
+}
