@@ -84,7 +84,7 @@ export default (app) => {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        secure: isProduction,
+        secure: "auto",
         secureProxy: isProduction,
         sameSite: true,
         httpOnly: true,
