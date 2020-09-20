@@ -1,10 +1,10 @@
-process.env.VUE_APP_VERSION = require('./package').version;
+process.env.VUE_APP_VERSION = require("./package").version;
 
 module.exports = {
   chainWebpack: config => {
-    const svgRule = config.module.rule('svg');
+    const svgRule = config.module.rule("svg");
     svgRule.uses.clear();
-    svgRule.use('vue-svg-loader').loader('vue-svg-loader');
+    svgRule.use("vue-svg-loader").loader("vue-svg-loader");
   },
 
   productionSourceMap: false,
@@ -12,14 +12,14 @@ module.exports = {
   pluginOptions: {
     express: {
       shouldServeApp: true,
-      serverDir: './app'
+      serverDir: "./app"
     }
   },
 
   devServer: {
     proxy: {
-      '^/api': {
-        target: 'http://localhost:3000',
+      "^/api": {
+        target: "http://localhost:3000",
         ws: true,
         changeOrigin: true
       }

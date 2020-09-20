@@ -1,9 +1,9 @@
-import { version } from '../package.json';
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueWait from 'vue-wait';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
+import { version } from "../package.json";
+import Vue from "vue";
+import Vuex from "vuex";
+import VueWait from "vue-wait";
+import axios from "axios";
+import VueAxios from "vue-axios";
 
 axios.defaults.withCredentials = true;
 Vue.use(Vuex);
@@ -13,19 +13,19 @@ Vue.use(VueAxios, axios);
 const autosave = store => {
   store.subscribe((mutation, state) => {
     // Store the state object as a JSON string
-    localStorage.setItem('store', JSON.stringify(state));
+    localStorage.setItem("store", JSON.stringify(state));
   });
 };
 
 export default new Vuex.Store({
   state: {
     user: null,
-    version: ''
+    version: ""
   },
   mutations: {
     init_store(state) {
-      if (localStorage.getItem('store')) {
-        let store = JSON.parse(localStorage.getItem('store'));
+      if (localStorage.getItem("store")) {
+        let store = JSON.parse(localStorage.getItem("store"));
         // Check the version stored against current. If different, don't
         // load the cached version
         if (store.version == version) {
@@ -48,12 +48,12 @@ export default new Vuex.Store({
   actions: {
     fetchProfile({ commit }) {
       return axios
-        .get('/api/profile')
+        .get("/api/profile")
         .then(({ data, status }) => {
           if (status !== 200) {
-            commit('destroy_profile');
+            commit("destroy_profile");
           } else {
-            commit('store_profile', data.profile);
+            commit("store_profile", data.profile);
           }
         })
         .catch(error => {
@@ -61,14 +61,14 @@ export default new Vuex.Store({
         });
     },
     silenceTheLambs() {
-      return axios.post('/api/friends', { wantRetweets: false });
+      return axios.post("/api/friends", { wantRetweets: false });
     },
     releaseTheKraken() {
-      return axios.post('/api/friends', { wantRetweets: true });
+      return axios.post("/api/friends", { wantRetweets: true });
     },
     signOut({ commit }) {
-      return axios.post('/api/signout').then(() => {
-        commit('destroy_profile');
+      return axios.post("/api/signout").then(() => {
+        commit("destroy_profile");
       });
     }
   },
@@ -78,5 +78,5 @@ export default new Vuex.Store({
     }
   },
   plugins: [autosave],
-  strict: process.env.NODE_ENV !== 'production'
+  strict: process.env.NODE_ENV !== "production"
 });

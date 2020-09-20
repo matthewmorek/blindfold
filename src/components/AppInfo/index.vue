@@ -1,7 +1,7 @@
 <template>
   <div class="app-info">
     <div class="app-info--icon">
-      <app-icon width="80%" class="icon" />
+      <AppIcon width="80%" class="icon" />
     </div>
     <h1 class="app-info--title">
       Blindfold
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import AppIcon from '../../public/app-icon.svg';
+import AppIcon from "../../public/app-icon.svg";
 export default {
   components: {
     AppIcon

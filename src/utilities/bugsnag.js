@@ -1,9 +1,9 @@
-import bugsnag from '@bugsnag/js';
+import bugsnag from "@bugsnag/js";
 
 const bugsnagClient = bugsnag({
   apiKey: process.env.VUE_APP_BUGSNAG_ID,
   appVersion: process.env.VUE_APP_VERSION,
-  appType: 'client',
+  appType: "client",
   collectUserIp: false
 });
 

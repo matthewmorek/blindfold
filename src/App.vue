@@ -1,24 +1,29 @@
 <template>
   <div id="app">
-    <app-welcome
+    <AppWelcome
       v-if="!isAuthenticated"
       :is-loading="isLoading"
       @fetch-profile="fetchProfile"
       @show-modal="showModal"
     />
-    <app-user
+    <AppUser
       v-else
       :is-loading="isLoading"
       :profile="userProfile"
       @sign-out="signOut"
       @show-modal="showModal"
     />
-    <app-update :update-exists="updateExists" @update-app="refreshApp"
-      >New update available. Tap to upgrade.</app-update
-    >
+    <AppUpdate :update-exists="updateExists" @update-app="refreshApp">
+      New update available. Tap to upgrade.
+    </AppUpdate>
     <!-- prettier-ignore -->
-    <modal :show="isVisible" @close-modal="hideModal">
-      <template #header>About</template>
+    <Modal
+      :show="isVisible"
+      @close-modal="hideModal"
+    >
+      <template #header>
+        About
+      </template>
       <template #default>
         <div class="about-box">
           <header class="about-box--header">
@@ -28,7 +33,10 @@
             A simple noise suppression system for Twitter built with <a href="https://vuejs.org">Vue.js</a>, <a href="https://expressjs.com">Express</a>, and <a href="https://postcss.org">modern CSS</a>.
           </div>
           <div class="section-cta">
-            <a href="https://ko-fi.com/matthewmorek" class="btn btn-cta btn-regular">Buy me a coffee ☕️</a>
+            <a
+              href="https://ko-fi.com/matthewmorek"
+              class="btn btn-cta btn-regular"
+            >Buy me a coffee ☕️</a>
           </div>
           <footer class="about-box--footer">
             <p>
@@ -40,23 +48,23 @@
           </footer>
         </div>
       </template>
-    </modal>
+    </Modal>
   </div>
 </template>
 
 <script>
-import AppWelcome from './layout/AppWelcome';
-import AppUser from './layout/AppUser';
-import AppUpdate from './components/AppUpdate';
-import Modal from './components/Modal';
-import { version } from '../package.json';
+import AppWelcome from "./layout/AppWelcome";
+import AppUser from "./layout/AppUser";
+import AppUpdate from "./components/AppUpdate";
+import Modal from "./components/Modal";
+import { version } from "../package.json";
 
-import isEmpty from 'lodash/fp/isEmpty';
-import AppIcon from './public/app-icon.svg';
-import { formatDistance, getYear } from 'date-fns';
+import isEmpty from "lodash/fp/isEmpty";
+// import AppIcon from './public/app-icon.svg';
+import { getYear } from "date-fns";
 
 export default {
-  name: 'Blindfold',
+  name: "Blindfold",
   components: {
     AppWelcome,
     AppUser,
@@ -92,14 +100,14 @@ export default {
   },
   created() {
     // Listen for the updateReady event and update the local state accordingly
-    document.addEventListener('updateReady', this.showRefreshUI, {
+    document.addEventListener("updateReady", this.showRefreshUI, {
       once: true
     });
     // Refresh all open app tabs when a new service worker is installed.
     navigator.serviceWorker &&
       navigator.serviceWorker.addEventListener(
         // triggered by registration.claim
-        'controllerchange',
+        "controllerchange",
         () => {
           if (this.refreshing) return;
           this.refreshing = true;
@@ -108,11 +116,11 @@ export default {
       );
   },
   mounted() {
-    this.$store.commit('reset_wait');
+    this.$store.commit("reset_wait");
     this.fetchProfile();
   },
   beforeDestroy() {
-    document.removeEventListener('updateReady', this.showRefreshUI);
+    document.removeEventListener("updateReady", this.showRefreshUI);
   },
   methods: {
     isEmpty,
@@ -120,18 +128,18 @@ export default {
     getData: ({ data }) => data,
     fetchProfile: async function() {
       try {
-        this.$wait.start('fetchProfile');
-        await this.$store.dispatch('fetchProfile');
+        this.$wait.start("fetchProfile");
+        await this.$store.dispatch("fetchProfile");
       } catch (error) {
         alert(error);
       } finally {
-        this.$wait.end('fetchProfile');
+        this.$wait.end("fetchProfile");
       }
     },
     signOut: async function(eventType) {
       try {
         this.$wait.start(eventType);
-        await this.$store.dispatch('signOut');
+        await this.$store.dispatch("signOut");
       } catch (error) {
         alert(error);
       } finally {
@@ -155,7 +163,7 @@ export default {
       if (!this.worker) {
         return;
       }
-      this.worker.postMessage({ type: 'SKIP_WAITING' });
+      this.worker.postMessage({ type: "SKIP_WAITING" });
     },
     hideModal() {
       this.isVisible = false;
@@ -168,7 +176,7 @@ export default {
 </script>
 
 <style lang="postcss">
-@import './styles/global';
+@import "./styles/global";
 
 .icon {
   fill: var(--icon);

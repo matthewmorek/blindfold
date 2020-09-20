@@ -1,14 +1,14 @@
 module.exports = {
-  map: 'inline',
+  map: "inline",
   plugins: {
-    'postcss-import': {},
+    "postcss-import": {},
     precss: {
-      'postcss-preset-env': {
+      "postcss-preset-env": {
         stage: 1,
         preserve: true
       }
     },
     autoprefixer: {},
-    cssnano: process.env.NODE_ENV === 'production' ? {} : false
+    cssnano: process.env.NODE_ENV === "production" ? {} : false
   }
 };

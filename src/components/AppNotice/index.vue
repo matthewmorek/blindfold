@@ -1,7 +1,7 @@
 <template>
   <div class="app-notice">
     <div class="app-notice--text">
-      <slot name="text"></slot>
+      <slot name="text" />
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="app-about">
     <div>Made in MCR 🐝</div>
     <button class="btn-pill" @click="$emit('show-modal')">
-      <info-icon width="32" height="32" class="icon btn-pill-icon" /><span
+      <InfoIcon width="32" height="32" class="icon btn-pill-icon" /><span
         class="btn-pill-label"
         >Meta</span
       >
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import InfoIcon from '../../public/info-icon.svg';
+import InfoIcon from "../../public/info-icon.svg";
 export default {
   components: {
     InfoIcon
