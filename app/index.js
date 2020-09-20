@@ -5,10 +5,10 @@ const promiseLimit = require("promise-limit");
 const express = require("express");
 const sanitizer = require("express-sanitizer");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const redis = require("redis");
 const redisClient = redis.createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
-// const cors = require('cors');
 const config = require("./config");
 const path = require("path");
 const helmet = require("helmet");
@@ -83,8 +83,8 @@ export default (app) => {
     session({
       secret: config.salt,
       name: "_session",
-      resave: true,
-      saveUninitialized: true,
+      resave: false,
+      saveUninitialized: false,
       cookie: {
         secure: isProduction,
         secureProxy: isProduction,
@@ -97,6 +97,8 @@ export default (app) => {
       store: new redisStore({ client: redisClient }),
     })
   );
+
+  app.use(cookieParser(config.salt));
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -128,7 +130,9 @@ export default (app) => {
             event.addMetadata("api", error);
           }
         );
-        return res.status(500).json({ error, status });
+        return res
+          .status(500)
+          .json({ error, status, cookies: req.cookies, session: req.session });
       }
 
       req.session.auth = info;
