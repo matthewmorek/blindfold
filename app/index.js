@@ -83,7 +83,7 @@ export default (app) => {
     session({
       secret: config.salt,
       name: "_session",
-      resave: false,
+      resave: true,
       saveUninitialized: true,
       cookie: {
         secure: isProduction,
@@ -116,7 +116,7 @@ export default (app) => {
   // Process Twitter callback and verify authentication
   app.get("/api/auth/callback", function (req, res, next) {
     passport.authenticate("twitter", { session: true }, function (
-      err,
+      error,
       user,
       info,
       status
