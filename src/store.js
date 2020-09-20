@@ -3,11 +3,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueWait from 'vue-wait';
 import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-// import bugsnagClient from './utilities/bugsnag';
-
+axios.defaults.withCredentials = true;
 Vue.use(Vuex);
 Vue.use(VueWait);
+Vue.use(VueAxios, axios);
 
 const autosave = store => {
   store.subscribe((mutation, state) => {
@@ -66,7 +67,7 @@ export default new Vuex.Store({
       return axios.post('/api/friends', { wantRetweets: true });
     },
     signOut({ commit }) {
-      return axios.post('/api/signout').then(res => {
+      return axios.post('/api/signout').then(() => {
         commit('destroy_profile');
       });
     }
