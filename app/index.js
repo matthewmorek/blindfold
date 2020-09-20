@@ -101,6 +101,7 @@ export default (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Automatically upgrade to HTTPS in production
   app.get("*", function (req, res, next) {
     if (req.protocol === "http" && isProduction) {
       return res.redirect(301, `https://${req.hostname}${req.originalUrl}`);
@@ -117,17 +118,17 @@ export default (app) => {
     passport.authenticate("twitter", { session: true }, function (
       err,
       user,
-      info
-      // status
+      info,
+      status
     ) {
-      if (err) {
+      if (error) {
         req.bugsnag.notify(
           new Error("Problem authenticating with Twitter API"),
           function (event) {
-            event.addMetadata("api", err);
+            event.addMetadata("api", error);
           }
         );
-        return res.status(500).json({ error: err });
+        return res.status(500).json({ error, status });
       }
 
       req.session.auth = info;
