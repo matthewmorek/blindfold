@@ -114,7 +114,7 @@ export default (app) => {
   // Process Twitter callback and verify authentication
   app.get("/api/auth/callback", function (req, res, next) {
     passport.authenticate("twitter", function (error, user, info) {
-      if (error) {
+      if (!isEmpty(error)) {
         req.bugsnag.notify(
           new Error("Problem authenticating with Twitter API"),
           function (event) {
