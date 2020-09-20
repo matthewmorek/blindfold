@@ -5,9 +5,7 @@ const promiseLimit = require("promise-limit");
 const express = require("express");
 const sanitizer = require("express-sanitizer");
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
-const redis = require("redis");
-const redisClient = redis.createClient(process.env.REDIS_URL);
+const redisClient = require("redis").createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
 const config = require("./config");
 const path = require("path");
@@ -97,8 +95,6 @@ export default (app) => {
       store: new redisStore({ client: redisClient }),
     })
   );
-
-  app.use(cookieParser(config.salt));
 
   app.use(passport.initialize());
   app.use(passport.session());
