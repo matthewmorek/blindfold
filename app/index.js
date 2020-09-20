@@ -86,7 +86,7 @@ export default (app) => {
       cookie: {
         secure: "auto",
         secureProxy: isProduction,
-        sameSite: true,
+        sameSite: "Lax",
         httpOnly: true,
         overwrite: true,
         maxAge: 30 * 24 * 36000,
