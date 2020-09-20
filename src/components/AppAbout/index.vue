@@ -14,8 +14,8 @@
 import InfoIcon from "../../public/info-icon.svg";
 export default {
   components: {
-    InfoIcon
-  }
+    InfoIcon,
+  },
 };
 </script>
 

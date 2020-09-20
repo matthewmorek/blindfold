@@ -14,16 +14,12 @@
 
           <span class="profile--label">{{ profile.displayName }}</span>
         </div>
-        <button class="btn-mini" @click="$emit('sign-out')">
-          Sign out
-        </button>
+        <button class="btn-mini" @click="$emit('sign-out')">Sign out</button>
       </div>
     </template>
     <template #default>
       <div class="app-content">
-        <h1 class="heading">
-          Tailor your Twitter feed
-        </h1>
+        <h1 class="heading">Tailor your Twitter feed</h1>
         <div class="actions">
           <AppButton
             event-type="silenceTheLambs"
@@ -32,9 +28,7 @@
           >
             Hide retweets
           </AppButton>
-          <p class="spacer">
-            or
-          </p>
+          <p class="spacer">or</p>
           <AppButton :is-loading="isLoading" event-type="releaseTheKraken">
             Show retweets
           </AppButton>
@@ -62,23 +56,23 @@ export default {
     BaseLayout,
     AppButton,
     AppAbout,
-    AppIcon
+    AppIcon,
   },
   props: {
     isLoading: {
       type: Boolean,
-      required: true
+      required: true,
     },
     profile: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   computed: {
     user() {
       return this.$store.getters.user;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -10,7 +10,7 @@ Vue.use(Vuex);
 Vue.use(VueWait);
 Vue.use(VueAxios, axios);
 
-const autosave = store => {
+const autosave = (store) => {
   store.subscribe((mutation, state) => {
     // Store the state object as a JSON string
     localStorage.setItem("store", JSON.stringify(state));
@@ -20,7 +20,7 @@ const autosave = store => {
 export default new Vuex.Store({
   state: {
     user: null,
-    version: ""
+    version: "",
   },
   mutations: {
     init_store(state) {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
     reset_wait(state) {
       state.wait.waitingFor = [];
-    }
+    },
   },
   actions: {
     fetchProfile({ commit }) {
@@ -56,7 +56,7 @@ export default new Vuex.Store({
             commit("store_profile", data.profile);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -70,13 +70,13 @@ export default new Vuex.Store({
       return axios.post("/api/signout").then(() => {
         commit("destroy_profile");
       });
-    }
+    },
   },
   getters: {
     user(state) {
       return state.user;
-    }
+    },
   },
   plugins: [autosave],
-  strict: process.env.NODE_ENV !== "production"
+  strict: process.env.NODE_ENV !== "production",
 });

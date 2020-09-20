@@ -15,10 +15,10 @@ Vue.config.productionTip = false;
 new Vue({
   store,
   wait: new VueWait({
-    useVuex: true
+    useVuex: true,
   }),
   beforeCreate() {
     store.commit("init_store");
   },
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

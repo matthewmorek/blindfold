@@ -17,22 +17,22 @@
 <script>
 export default {
   computed: {
-    hasHeaderSlot: function() {
+    hasHeaderSlot: function () {
       return !!this.$slots.header;
     },
-    hasDefaultSlot: function() {
+    hasDefaultSlot: function () {
       return !!this.$slots.default;
     },
-    hasFooterSlot: function() {
+    hasFooterSlot: function () {
       return !!this.$slots.footer;
-    }
+    },
   },
   created() {
     // This is a fix for having a consistent `vh` units
     // Ref: https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }
+  },
 };
 </script>
 

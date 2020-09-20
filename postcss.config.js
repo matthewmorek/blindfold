@@ -5,10 +5,10 @@ module.exports = {
     precss: {
       "postcss-preset-env": {
         stage: 1,
-        preserve: true
-      }
+        preserve: true,
+      },
     },
     autoprefixer: {},
-    cssnano: process.env.NODE_ENV === "production" ? {} : false
-  }
+    cssnano: process.env.NODE_ENV === "production" ? {} : false,
+  },
 };

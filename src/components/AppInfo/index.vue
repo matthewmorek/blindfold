@@ -18,8 +18,8 @@
 import AppIcon from "../../public/app-icon.svg";
 export default {
   components: {
-    AppIcon
-  }
+    AppIcon,
+  },
 };
 </script>
 

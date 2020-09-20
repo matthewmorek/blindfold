@@ -31,13 +31,13 @@ export default {
     BaseLayout,
     AppInfo,
     AppNotice,
-    AppAbout
+    AppAbout,
   },
   props: {
     isLoading: {
-      type: Boolean
-    }
-  }
+      type: Boolean,
+    },
+  },
 };
 </script>
 

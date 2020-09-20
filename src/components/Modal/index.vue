@@ -12,9 +12,7 @@
             </button>
           </header>
           <div class="modal--body" :class="bodyClass">
-            <slot name="default">
-              This is a modal content
-            </slot>
+            <slot name="default"> This is a modal content </slot>
           </div>
         </div>
       </transition>
@@ -26,19 +24,19 @@
 import CloseIcon from "../../public/close-icon.svg";
 export default {
   components: {
-    CloseIcon
+    CloseIcon,
   },
   props: {
     show: {
       type: Boolean,
-      required: true
+      required: true,
     },
     bodyClass: {
       type: String,
       required: false,
-      default: null
-    }
-  }
+      default: null,
+    },
+  },
 };
 </script>
 

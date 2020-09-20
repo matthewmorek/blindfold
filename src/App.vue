@@ -69,7 +69,7 @@ export default {
     AppWelcome,
     AppUser,
     AppUpdate,
-    Modal
+    Modal,
   },
   data() {
     return {
@@ -81,27 +81,27 @@ export default {
       refreshing: false,
       isVisible: false,
       appVersion: version,
-      currentYear: getYear(new Date())
+      currentYear: getYear(new Date()),
     };
   },
   computed: {
-    isLoading: function() {
+    isLoading: function () {
       return this.$wait.any;
     },
-    isAuthenticated: function() {
+    isAuthenticated: function () {
       return (
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       );
     },
-    userProfile: function() {
+    userProfile: function () {
       return this.$store.getters.user;
-    }
+    },
   },
   created() {
     // Listen for the updateReady event and update the local state accordingly
     document.addEventListener("updateReady", this.showRefreshUI, {
-      once: true
+      once: true,
     });
     // Refresh all open app tabs when a new service worker is installed.
     navigator.serviceWorker &&
@@ -126,7 +126,7 @@ export default {
     isEmpty,
     getYear,
     getData: ({ data }) => data,
-    fetchProfile: async function() {
+    fetchProfile: async function () {
       try {
         this.$wait.start("fetchProfile");
         await this.$store.dispatch("fetchProfile");
@@ -136,7 +136,7 @@ export default {
         this.$wait.end("fetchProfile");
       }
     },
-    signOut: async function(eventType) {
+    signOut: async function (eventType) {
       try {
         this.$wait.start(eventType);
         await this.$store.dispatch("signOut");
@@ -170,8 +170,8 @@ export default {
     },
     showModal() {
       this.isVisible = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
