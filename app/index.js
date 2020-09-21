@@ -39,9 +39,20 @@ export default (app) => {
         consumerSecret: config.app_secret,
         callbackURL: "/api/auth/callback",
         proxy: config.env.use_proxy,
+        includeStatus: true,
+        passReqToCallback: true,
       },
-      function (token, tokenSecret, profile, cb) {
-        return cb(null, profile, {
+      function (req, token, tokenSecret, profile, done) {
+        const newProfile = {
+          id: profile.user.id,
+          username: profile.user.username,
+          displayName: profile.user.displayName,
+          photo: user.photos[0].value,
+        };
+
+        req.session.user = newProfile;
+
+        return done(null, newProfile, {
           consumer_key: config.app_key,
           consumer_secret: config.app_secret,
           access_token_key: token,
@@ -88,7 +99,6 @@ export default (app) => {
         secureProxy: isProduction,
         sameSite: "Lax",
         httpOnly: true,
-        overwrite: true,
         maxAge: 30 * 24 * 36000,
         expires: nextYear,
       },
@@ -115,7 +125,7 @@ export default (app) => {
   app.get(
     "/api/auth/callback",
     passport.authenticate("twitter", {
-      failureRedirect: "/",
+      failureRedirect: "/401",
       successRedirect: "/",
     })
   );
