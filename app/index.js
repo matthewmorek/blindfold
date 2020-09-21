@@ -4,6 +4,7 @@
 const promiseLimit = require("promise-limit");
 const express = require("express");
 const sanitizer = require("express-sanitizer");
+const cors = require("cors");
 const session = require("express-session");
 const redisClient = require("redis").createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
