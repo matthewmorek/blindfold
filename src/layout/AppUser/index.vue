@@ -1,9 +1,9 @@
 <template>
-  <base-layout>
+  <BaseLayout>
     <template #header>
       <div class="app-header-wrapper">
         <div class="profile">
-          <app-icon width="32" class="icon profile--app-icon" />
+          <AppIcon width="32" class="icon profile--app-icon" />
           <span class="profile--img"
             ><img
               :src="profile.photo"
@@ -11,6 +11,7 @@
               class="app-header-photo"
               width="24"
           /></span>
+
           <span class="profile--label">{{ profile.displayName }}</span>
         </div>
         <button class="btn-mini" @click="$emit('sign-out')">Sign out</button>
@@ -20,16 +21,17 @@
       <div class="app-content">
         <h1 class="heading">Tailor your Twitter feed</h1>
         <div class="actions">
-          <app-button
+          <AppButton
             event-type="silenceTheLambs"
             :is-loading="isLoading"
             is-primary
-            >Hide retweets</app-button
           >
+            Hide retweets
+          </AppButton>
           <p class="spacer">or</p>
-          <app-button :is-loading="isLoading" event-type="releaseTheKraken"
-            >Show retweets</app-button
-          >
+          <AppButton :is-loading="isLoading" event-type="releaseTheKraken">
+            Show retweets
+          </AppButton>
         </div>
         <p>
           Using this tool will only affect retweets. <br />You will still see
@@ -38,39 +40,39 @@
       </div>
     </template>
     <template #footer>
-      <app-about @show-modal="$emit('show-modal')" />
+      <AppAbout @show-modal="$emit('show-modal')" />
     </template>
-  </base-layout>
+  </BaseLayout>
 </template>
 
 <script>
-import BaseLayout from '@/layout/BaseLayout';
-import AppButton from '@/components/AppButton';
-import AppAbout from '@/components/AppAbout';
-import AppIcon from '@/public/app-icon.svg';
+import BaseLayout from "@/layout/BaseLayout";
+import AppButton from "@/components/AppButton";
+import AppAbout from "@/components/AppAbout";
+import AppIcon from "@/public/app-icon.svg";
 
 export default {
   components: {
     BaseLayout,
     AppButton,
     AppAbout,
-    AppIcon
+    AppIcon,
   },
   props: {
     isLoading: {
       type: Boolean,
-      required: true
+      required: true,
     },
     profile: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   computed: {
     user() {
       return this.$store.getters.user;
-    }
-  }
+    },
+  },
 };
 </script>
 

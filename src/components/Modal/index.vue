@@ -8,11 +8,11 @@
               <slot name="header">Modal header</slot>
             </span>
             <button class="btn-close-modal" @click="$emit('close-modal')">
-              <close-icon width="24" height="24" class="icon" />
+              <CloseIcon width="24" height="24" class="icon" />
             </button>
           </header>
           <div class="modal--body" :class="bodyClass">
-            <slot name="default">This is a modal content</slot>
+            <slot name="default"> This is a modal content </slot>
           </div>
         </div>
       </transition>
@@ -21,22 +21,22 @@
 </template>
 
 <script>
-import CloseIcon from '../../public/close-icon.svg';
+import CloseIcon from "../../public/close-icon.svg";
 export default {
   components: {
-    CloseIcon
+    CloseIcon,
   },
   props: {
     show: {
       type: Boolean,
-      required: true
+      required: true,
     },
     bodyClass: {
       type: String,
       required: false,
-      default: null
-    }
-  }
+      default: null,
+    },
+  },
 };
 </script>
 

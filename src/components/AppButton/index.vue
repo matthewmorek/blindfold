@@ -5,14 +5,14 @@
       'btn',
       { 'btn-flat': isLoading },
       { 'btn-cta': isPrimary },
-      btnState
+      btnState,
     ]"
     :aria-label="btnLabel"
     @click="btnClick"
   >
     <transition name="flip" mode="out-in">
-      <bouncing-balls v-if="btnState === 'working'" />
-      <icon-done v-if="btnState === 'complete'" class="icon" />
+      <BouncingBalls v-if="btnState === 'working'" />
+      <IconDone v-if="btnState === 'complete'" class="icon" />
       <span v-if="btnState === 'error'" class="label">Oops! Try again</span>
       <span v-if="btnState === 'default'" class="label"
         ><slot>{{ btnLabel }}</slot></span
@@ -22,65 +22,66 @@
 </template>
 
 <script>
-import BouncingBalls from '@/components/BouncingBalls';
-import IconDone from '@/public/done-icon.svg';
+import BouncingBalls from "@/components/BouncingBalls";
+import IconDone from "@/public/done-icon.svg";
 export default {
-  name: 'AppButton',
+  name: "AppButton",
   components: {
     BouncingBalls,
-    IconDone
+    IconDone,
   },
   props: {
     btnLabel: {
       type: String,
       required: false,
-      default: 'Button'
+      default: "Button",
     },
     isLoading: {
       type: Boolean,
-      required: true
+      required: true,
     },
     eventType: {
       type: String,
       required: false,
-      default: 'default'
+      default: "default",
     },
     isPrimary: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      btnState: 'default'
+      btnState: "default",
     };
   },
   methods: {
-    btnClick: async function() {
+    btnClick: async function () {
       try {
         // Change global state to lock controls
         this.$wait.start(this.eventType);
         // Change local button state
-        this.btnState = 'working';
+        this.btnState = "working";
         // Dispatch event
         await this.$store.dispatch(this.eventType);
         // Change local button state
-        this.btnState = 'complete';
+        this.btnState = "complete";
       } catch (error) {
-        this.btnState = 'error';
+        this.btnState = "error";
       } finally {
         // Simple `wait` Promise
-        const wait = time => new Promise(resolve => setTimeout(resolve, time));
+        const wait = (time) =>
+          new Promise((resolve) => setTimeout(resolve, time));
 
         // Wait a little to preserve visual feedback
         wait(2500).then(() => {
           this.$wait.end(this.eventType);
-          this.btnState = 'default';
+          this.btnState = "default";
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

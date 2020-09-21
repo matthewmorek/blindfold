@@ -1,7 +1,7 @@
 <template>
   <span class="spinner">
-    <span class="double-bounce1"></span>
-    <span class="double-bounce2"></span>
+    <span class="double-bounce1" />
+    <span class="double-bounce2" />
   </span>
 </template>
 

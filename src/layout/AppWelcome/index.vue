@@ -1,41 +1,43 @@
 <template>
-  <base-layout>
+  <BaseLayout>
     <template #default>
-      <app-info />
+      <AppInfo />
     </template>
     <template #footer>
       <div class="app-footer--cta">
         <a href="/api/auth" class="btn btn-cta">Sign in with Twitter</a>
       </div>
       <!-- prettier-ignore -->
-      <app-notice>
+      <AppNotice>
         <template
           #text
-        >This service is free. You will confirm your intention after signing in with Twitter.</template>
-      </app-notice>
-      <app-about @show-modal="$emit('show-modal')" />
+        >
+          This service is free. You will confirm your intention after signing in with Twitter.
+        </template>
+      </AppNotice>
+      <AppAbout @show-modal="$emit('show-modal')" />
     </template>
-  </base-layout>
+  </BaseLayout>
 </template>
 
 <script>
-import BaseLayout from '../BaseLayout';
-import AppInfo from '../../components/AppInfo';
-import AppNotice from '../../components/AppNotice';
-import AppAbout from '../../components/AppAbout';
+import BaseLayout from "../BaseLayout";
+import AppInfo from "../../components/AppInfo";
+import AppNotice from "../../components/AppNotice";
+import AppAbout from "../../components/AppAbout";
 
 export default {
   components: {
     BaseLayout,
     AppInfo,
     AppNotice,
-    AppAbout
+    AppAbout,
   },
   props: {
     isLoading: {
-      type: Boolean
-    }
-  }
+      type: Boolean,
+    },
+  },
 };
 </script>
 
