@@ -1,6 +1,6 @@
 {
   "name": "blindfold",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -47,6 +47,7 @@
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "promise-limit": "^2.7.0",
+    "quickmetrics": "^1.0.2",
     "redis": "^3.0.2",
     "register-service-worker": "^1.7.1",
     "reset-css": "^5.0.1",
