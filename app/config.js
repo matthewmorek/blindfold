@@ -15,6 +15,7 @@ class Config {
     this.app_version = require("../package").version;
     this.salt = process.env.SALT || crypto({ length: 10, type: "base64" });
     this.bs_key = process.env.BUGSNAG_API_KEY || null;
+    this.qm_key = process.env.QM_API_KEY || null;
   }
 }
 
