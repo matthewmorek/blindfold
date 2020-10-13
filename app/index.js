@@ -66,9 +66,9 @@ export default (app) => {
     expressCspHeader({
       directives: {
         "default-src": [SELF],
-        "script-src": [SELF, INLINE, "googleapis.com"],
-        "style-src": [SELF],
-        "img-src": ["data:", "twimg.com"],
+        "script-src": [SELF, INLINE, "*.googleapis.com"],
+        "style-src": [SELF, INLINE, "*.googleapis.com"],
+        "img-src": [SELF, "data:", "twimg.com"],
         "worker-src": [SELF],
         "block-all-mixed-content": true,
       },
