@@ -22,6 +22,7 @@ const Bugsnag = require("@bugsnag/js");
 const BugsnagPluginExpress = require("@bugsnag/plugin-express");
 const isEmpty = require("lodash/fp/isEmpty");
 const Quickmetrics = require("quickmetrics");
+const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
 
 export default (app) => {
   var isProduction = config.env === "production" ? true : false;
@@ -61,6 +62,18 @@ export default (app) => {
   app.set("trust proxy", true);
   app.use(helmet());
   app.use(cors({ credentials: true, origin: "frontend address" }));
+  app.use(
+    expressCspHeader({
+      directives: {
+        "default-src": [SELF],
+        "script-src": [SELF, INLINE, "googleapis.com"],
+        "style-src": [SELF],
+        "img-src": ["data:", "twimg.com"],
+        "worker-src": [SELF],
+        "block-all-mixed-content": true,
+      },
+    })
+  );
   app.use(express.static(path.join(__dirname, "./../dist"), { index: false }));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));

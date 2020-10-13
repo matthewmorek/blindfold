@@ -3433,6 +3433,11 @@ crypto-random-string@^3.3.0:
   dependencies:
     type-fest "^0.8.1"
 
+csp-header@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/csp-header/-/csp-header-2.1.1.tgz#ea10aa54dbab4301f2b962b13ad7383b83e191b3"
+  integrity sha512-JuUi95nVFMuVOcI/A10+8CwpWflq3TS/sgperD109BG0xg7pEY1x1E1Aqv0LIpIKHdgkCK0nIZqu1RVRRRoMJA==
+
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/css-blank-pseudo/-/css-blank-pseudo-0.1.4.tgz#dfdefd3254bf8a82027993674ccf35483bfcb3c5"
@@ -4475,6 +4480,14 @@ expand-brackets@^2.1.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+express-csp-header@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/express-csp-header/-/express-csp-header-4.0.0.tgz#117e2920d49ebdb6ae519addea161967ab28aba5"
+  integrity sha512-ksDlHZUHmZtNyULAuFqeX91q1bVNJk8z26cYRrKmPxkgeqEDrdI72uvI77/8ufxsnPLZ9gbgmt31fWVXD4d0pw==
+  dependencies:
+    csp-header "^2.1.1"
+    psl "^1.8.0"
 
 express-list-endpoints@^4.0.1:
   version "4.0.1"
@@ -8753,7 +8766,7 @@ pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
 
-psl@^1.1.28:
+psl@^1.1.28, psl@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.8.0.tgz#9326f8bcfb013adcc005fdff056acce020e51c24"
   integrity sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ==
