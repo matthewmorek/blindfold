@@ -14,7 +14,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.core.setCacheNameDetails({
   prefix: "blindfold",
-  suffix: "v0.2.0",
+  suffix: "v1.1.0",
 });
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

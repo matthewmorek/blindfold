@@ -21,9 +21,17 @@ const Twitter = require("twitter");
 const Bugsnag = require("@bugsnag/js");
 const BugsnagPluginExpress = require("@bugsnag/plugin-express");
 const isEmpty = require("lodash/fp/isEmpty");
+const Quickmetrics = require("quickmetrics");
+const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
 
 export default (app) => {
   var isProduction = config.env === "production" ? true : false;
+
+  const qm = new Quickmetrics({
+    apiKey: config.qm_key,
+    maxBatchTime: 60, // max and default set to 60 seconds
+    maxBatchSize: 1000, // max and default set to 1000 events per batch
+  });
 
   if (!isProduction) {
     redisClient.on("connect", function () {
@@ -54,6 +62,18 @@ export default (app) => {
   app.set("trust proxy", true);
   app.use(helmet());
   app.use(cors({ credentials: true, origin: "frontend address" }));
+  app.use(
+    expressCspHeader({
+      directives: {
+        "default-src": [SELF],
+        "script-src": [SELF, INLINE, "*.googleapis.com", "*.gstatic.com"],
+        "style-src": [SELF, INLINE, "*.googleapis.com", "*.gstatic.com"],
+        "img-src": [SELF, "data:", "*.twimg.com", "*.gstatic.com"],
+        "worker-src": [SELF],
+        "block-all-mixed-content": true,
+      },
+    })
+  );
   app.use(express.static(path.join(__dirname, "./../dist"), { index: false }));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -151,6 +171,7 @@ export default (app) => {
     }),
     (req, res) => {
       if (req.user) {
+        qm.event("user.auth", 1);
         res.redirect("/");
       } else {
         res.status(401).end();
@@ -159,10 +180,14 @@ export default (app) => {
   );
 
   // handle 401 route
-  app.get("/401", (req, res) => res.status(401).end());
+  app.get("/401", (req, res) => {
+    qm.event("user.unauthorised", 1);
+    res.status(401).end();
+  });
 
   // get user profile data
   app.get("/api/profile", checkAuth, function (req, res) {
+    qm.event("app.opens", 1);
     res.status(200).json({ profile: req.user });
   });
 
@@ -217,6 +242,11 @@ export default (app) => {
         })
       )
         .then(function () {
+          qm.event(
+            "app.updates",
+            req.body.wantRetweets ? "enable" : "disable",
+            1
+          );
           next();
         })
         .catch(function (errors) {
