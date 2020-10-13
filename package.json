@@ -18,7 +18,7 @@
     "@bugsnag/plugin-vue": "^7.3.5",
     "@vue/cli-plugin-babel": "^4.5.7",
     "@vue/cli-plugin-eslint": "^4.5.7",
-    "@vue/cli-plugin-pwa": "^4.5.7",
+    "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-service": "^4.5.7",
     "@vue/cli-shared-utils": "^4.5.7",
     "apicache": "^1.5.3",
