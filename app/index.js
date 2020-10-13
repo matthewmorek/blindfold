@@ -68,7 +68,7 @@ export default (app) => {
         "default-src": [SELF],
         "script-src": [SELF, INLINE, "*.googleapis.com"],
         "style-src": [SELF, INLINE, "*.googleapis.com"],
-        "img-src": [SELF, "data:", "twimg.com"],
+        "img-src": [SELF, "data:", "*.twimg.com"],
         "worker-src": [SELF],
         "block-all-mixed-content": true,
       },
