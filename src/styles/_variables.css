@@ -1,6 +1,6 @@
 :root {
-  --font-family: 'Nunito Sans', -apple-system, system-ui, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
+  --font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
 
   --app-bg: rgb(255, 255, 255);
   --app-bg-blur: rgba(255, 255, 255, 0.75);
