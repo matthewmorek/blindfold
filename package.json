@@ -49,7 +49,7 @@
     "precss": "^4.0.0",
     "promise-limit": "^2.7.0",
     "quickmetrics": "^1.0.2",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "register-service-worker": "^1.7.1",
     "reset-css": "^5.0.1",
     "twitter": "^1.7.1",
