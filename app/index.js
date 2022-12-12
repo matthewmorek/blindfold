@@ -32,9 +32,9 @@ export default (app) => {
     maxBatchSize: 1000, // max and default set to 1000 events per batch
   });
 
-  if (isProduction) {
-    const redisClient = redis.createClient(process.env.REDIS_URL);
+  const redisClient = redis.createClient(process.env.REDIS_URL);
 
+  if (!isProduction) {
     redisClient.on("connect", function () {
       console.log("Connected to Redis");
     });
@@ -276,12 +276,10 @@ export default (app) => {
               event.addMetadata("api", errors);
             }
           );
-          res
-            .status(500)
-            .json({
-              error: "Problem getting `no_retweets` ids",
-              details: errors,
-            });
+          res.status(500).json({
+            error: "Problem getting `no_retweets` ids",
+            details: errors,
+          });
         });
     }
   );
