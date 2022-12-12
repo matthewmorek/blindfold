@@ -7,7 +7,6 @@ const sanitizer = require("express-sanitizer");
 const cors = require("cors");
 const session = require("express-session");
 const redis = require("redis");
-const redisClient = redis.createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
 const config = require("./config");
 const path = require("path");
@@ -33,7 +32,9 @@ export default (app) => {
     maxBatchSize: 1000, // max and default set to 1000 events per batch
   });
 
-  if (!isProduction) {
+  if (isProduction) {
+    const redisClient = redis.createClient(process.env.REDIS_URL);
+
     redisClient.on("connect", function () {
       console.log("Connected to Redis");
     });
@@ -132,7 +133,7 @@ export default (app) => {
         maxAge: 30 * 24 * 36000,
         expires: nextYear,
       },
-      store: new redisStore({ client: redisClient }),
+      store: isProduction ? new redisStore({ client: redisClient }) : null,
     })
   );
 
@@ -217,7 +218,9 @@ export default (app) => {
               event.addMetadata("api", errors);
             }
           );
-          res.status(500).json({ error: "Problem getting friends/ids" });
+          res
+            .status(500)
+            .json({ error: "Problem getting friends/ids", details: errors });
         });
     },
     function (req, res, next) {
@@ -273,7 +276,12 @@ export default (app) => {
               event.addMetadata("api", errors);
             }
           );
-          res.status(500).json({ error: "Problem getting `no_retweets` ids" });
+          res
+            .status(500)
+            .json({
+              error: "Problem getting `no_retweets` ids",
+              details: errors,
+            });
         });
     }
   );
