@@ -13,14 +13,14 @@ These instructions will get you a copy of the project up and running on your loc
 What you’ll need to get started.
 
 - Git
-- NodeJS 10+
+- NodeJS 16+
 - `npm` or Yarn
 
 ### Initial setup
 
 1. Using Git, clone this repository to your local machine.
-2. Run `npm install` or `yarn` from inside the project's directory to install all dependencies.
-3. Get your Consumer Key and Secret from https://apps.twitter.com.
+2. Run `npm install` or `yarn install` from inside the project's directory to install all dependencies.
+3. Get your API Key and API Secret from https://developer.twitter.com
 4. Run `cp ./env.local.sample ./.env` and adjust config variables.
 
 ### Configuration
@@ -31,17 +31,22 @@ _Blindfold_ has only a handful of options, but they are all required before the 
 
 If you want to tinker with this project, you can use Vue CLI to help you handle Hot Module Reloading (HMR).
 
+#### First, launch the backend, powered by Express
+```bash
+$ yarn express
+# or
+$ npm run express
+```
+#### Second, launch Vue.js frontend
 ```bash
 # launch dev server for the frontend UI
 $ yarn serve
 # or
 $ npm run serve
-
-# launch dev server for the backend API
-$ yarn express
-# or
-$ npm run express
 ```
+
+### Deploying
+To deploy, you only need to make sure to clone the repo, install dependencies, then run `yarn build` and make sure to point your proxy to the `./build` directory in order to serve the frontend properly.
 
 ### Contributing
 
