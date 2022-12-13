@@ -6,7 +6,7 @@ const express = require("express");
 const sanitizer = require("express-sanitizer");
 const cors = require("cors");
 const session = require("express-session");
-const redis = require("redis");
+const { createClient } = require("redis");
 const redisStore = require("connect-redis")(session);
 const config = require("./config");
 const path = require("path");
@@ -20,19 +20,12 @@ const Twitter = require("twitter");
 const Bugsnag = require("@bugsnag/js");
 const BugsnagPluginExpress = require("@bugsnag/plugin-express");
 const isEmpty = require("lodash/fp/isEmpty");
-const Quickmetrics = require("quickmetrics");
 const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
 
 export default (app) => {
   var isProduction = config.env === "production" ? true : false;
 
-  const qm = new Quickmetrics({
-    apiKey: config.qm_key,
-    maxBatchTime: 60, // max and default set to 60 seconds
-    maxBatchSize: 1000, // max and default set to 1000 events per batch
-  });
-
-  const redisClient = redis.createClient(process.env.REDIS_URL);
+  const redisClient = createClient(process.env.REDIS_URL);
 
   if (!isProduction) {
     redisClient.on("connect", function () {
@@ -93,19 +86,16 @@ export default (app) => {
       function (req, token, tokenSecret, profile, done) {
         const { id, username, displayName, photos } = profile;
 
-        req.session.auth = {
-          consumer_key: config.app_key,
-          consumer_secret: config.app_secret,
-          access_token_key: token,
-          access_token_secret: tokenSecret,
-        };
-
-        return done(null, {
-          id,
-          username,
-          displayName,
-          photo: photos[0].value,
-        });
+        return done(
+          null,
+          {
+            id,
+            username,
+            displayName,
+            photo: photos[0].value,
+          },
+          { access_token_key: token, access_token_secret: tokenSecret }
+        );
       }
     )
   );
@@ -133,7 +123,7 @@ export default (app) => {
         maxAge: 30 * 24 * 36000,
         expires: nextYear,
       },
-      store: isProduction ? new redisStore({ client: redisClient }) : null,
+      store: new redisStore({ client: redisClient }),
     })
   );
 
@@ -172,7 +162,8 @@ export default (app) => {
     }),
     (req, res) => {
       if (req.user) {
-        qm.event("user.auth", 1);
+        // store user access tokens in a local session
+        req.session.authInfo = req.authInfo;
         res.redirect("/");
       } else {
         res.status(401).end();
@@ -182,13 +173,11 @@ export default (app) => {
 
   // handle 401 route
   app.get("/401", (req, res) => {
-    qm.event("user.unauthorised", 1);
     res.status(401).end();
   });
 
   // get user profile data
   app.get("/api/profile", checkAuth, function (req, res) {
-    qm.event("app.opens", 1);
     res.status(200).json({ profile: req.user });
   });
 
@@ -204,7 +193,12 @@ export default (app) => {
     checkAuth,
     function (req, res, next) {
       // setTimeout(() => res.status(500), 2500);
-      _twitter = new Twitter(req.session.auth);
+      _twitter = new Twitter({
+        consumer_key: config.app_key,
+        consumer_secret: config.app_secret,
+        access_token_key: req.session.authInfo.access_token_key,
+        access_token_secret: req.session.authInfo.access_token_secret,
+      });
       _twitter
         .get("friends/ids", { stringify_ids: true })
         .then(function (response) {
@@ -245,11 +239,6 @@ export default (app) => {
         })
       )
         .then(function () {
-          qm.event(
-            "app.updates",
-            req.body.wantRetweets ? "enable" : "disable",
-            1
-          );
           next();
         })
         .catch(function (errors) {
