@@ -85,6 +85,6 @@
     "vue-svg-loader": "^0.16.0"
   },
   "engines": {
-    "node": "16.x"
+    "node": ">18.x"
   }
 }
