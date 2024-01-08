@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "express": "vue-cli-service express:watch",
     "express:run": "vue-cli-service express:run",
-    "start": "yarn express:run",
+    "start": "pnpm run express:run",
     "watch": "vue-cli-service build --watch"
   },
   "dependencies": {
@@ -85,6 +85,6 @@
     "vue-svg-loader": "^0.16.0"
   },
   "engines": {
-    "node": ">18.x"
+    "node": ">17.x"
   }
 }
